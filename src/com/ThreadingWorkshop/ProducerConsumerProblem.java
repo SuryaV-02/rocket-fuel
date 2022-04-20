@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class ProducerConsumerProblem {
     public static void main(String[] args) throws InterruptedException {
 
-        ServiceAgent serviceAgent = new ServiceAgent();
+        ServiceAgent serviceAgent = new ServiceAgent(8);
         Thread t_client = new Thread(() -> {
             try {
                 serviceAgent.demand();
@@ -13,7 +13,6 @@ public class ProducerConsumerProblem {
                 e.printStackTrace();
             }
         });
-
         Thread t_service = new Thread(() -> {
             try{
                 serviceAgent.satisfy();
@@ -50,6 +49,7 @@ class ServiceAgent{
             synchronized(this){
                 Request currReq = accessibilities.getUSerRequest();
                 while(buffer.size()==b_size){
+                    buffer = accessibilities.getSortedList(buffer);
                     System.out.println("P_WAIT");
                     wait();
                 }
@@ -68,7 +68,7 @@ class ServiceAgent{
                     wait();
                 }
                 Request currReq = buffer.removeFirst();
-                System.out.println("Satisfying : " + currReq.id);
+                System.out.println("Satisfying : " + currReq.id + " " + currReq.priority);
                 notify();
                 Thread.sleep(1000);
             }
