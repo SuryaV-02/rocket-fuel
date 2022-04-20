@@ -8,7 +8,7 @@ public class ProducerConsumerProblem {
         ServiceAgent serviceAgent = new ServiceAgent();
         Thread t_client = new Thread(() -> {
             try {
-                serviceAgent.request();
+                serviceAgent.demand();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -33,8 +33,9 @@ public class ProducerConsumerProblem {
 
 
 class ServiceAgent{
-    LinkedList<Integer> buffer = new LinkedList<>();
+    LinkedList<Request> buffer = new LinkedList<Request>();
     int b_size;
+//    Request currentReq;
 
     ServiceAgent(int memory_size){
         this.b_size = memory_size;
@@ -44,16 +45,16 @@ class ServiceAgent{
         this.b_size = 5;
     }
 
-    public void request() throws InterruptedException{
-        int value = 1;
+    public void demand() throws InterruptedException{
         while(true){
             synchronized(this){
+                Request currReq = accessibilities.getUSerRequest();
                 while(buffer.size()==b_size){
                     System.out.println("P_WAIT");
                     wait();
                 }
-                System.out.println("Produced : " + value);
-                buffer.add(value++);
+                System.out.println("Requesting : " + currReq.id + " " + currReq.priority + " " + currReq.message);
+                buffer.add(currReq);
                 notify();
                 Thread.sleep(1000);
             }
@@ -66,7 +67,8 @@ class ServiceAgent{
                     System.out.println("C_WAIT");
                     wait();
                 }
-                System.out.println("Consumed : " + buffer.removeFirst());
+                Request currReq = buffer.removeFirst();
+                System.out.println("Satisfying : " + currReq.id);
                 notify();
                 Thread.sleep(1000);
             }
