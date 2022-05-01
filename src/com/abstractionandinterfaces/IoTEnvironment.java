@@ -1,6 +1,6 @@
 package com.abstractionandinterfaces;
 
-public class driver{
+public class IoTEnvironment{
     public static void main(String[] args) {
         Dht11 dht = new Dht11("Anterior ring A");
         dht.help();
