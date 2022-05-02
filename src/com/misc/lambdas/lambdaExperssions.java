@@ -1,4 +1,4 @@
-package com.misc;
+package com.misc.lambdas;
 
 
 interface spaceShip{
