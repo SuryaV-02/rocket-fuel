@@ -8,6 +8,8 @@ interface spaceShip{
 public class lambdaExperssions {
 
     public static void main(String[] args) {
+
+//         W/O lambda
         spaceShip atlantica = new spaceShip() {
             @Override
             public void fly(float altitude) {
@@ -15,6 +17,7 @@ public class lambdaExperssions {
             }
         };
 
+//        With lambda
         spaceShip chandayan = (altitude)->{
             System.out.println("Currentlly at altitude " + altitude);
         };
@@ -24,3 +27,4 @@ public class lambdaExperssions {
     }
 
 }
+
