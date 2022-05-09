@@ -21,12 +21,17 @@ public class annotations {
 
     public static void main(String[] args) {
        Stupify s = new Stupify();
-       try{
-           alert a = s.getClass().getMethod("usage").getAnnotation(alert.class);
-           System.out.println("Annotation data : " + a.code()+ " "+ a.message());
-       }catch (NoSuchMethodException e){
-           e.printStackTrace();
-       }
+//       try{
+        alert a = null;
+        try {
+            a = s.getClass().getMethod("usage").getAnnotation(alert.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Annotation data : " + a.code()+ " "+ a.message());
+//       }catch (NoSuchMethodException e){
+//           e.printStackTrace();
+////       }
 
     }
 

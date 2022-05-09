@@ -16,7 +16,14 @@ public class Animal {
         this.e_level = e_level;
         this.habitat = habitat;
     }
+
+    Animal(){
+
+    }
+
     public String get_details(){
         return "Name : " + this.name + "\nSpecies : " + this.species + "\nHabitat : "+ this.habitat;
     }
 }
+
+

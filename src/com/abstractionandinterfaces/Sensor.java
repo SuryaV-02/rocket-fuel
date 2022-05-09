@@ -1,11 +1,21 @@
 package com.abstractionandinterfaces;
 
-abstract class Sensor {
+abstract class Sensor{
     String sensor_location;
+
+    Sensor(String lala){
+        System.out.println("Sensoe instinated");
+    }
+    Sensor(){}
+
+    static void what(){
+        System.out.println("I am a static content");
+    }
+
     abstract void check_working();
     void help(){
-        System.out.println("A sensor is a physical device that helps you to measure physical readings and gives you the data.");
+        System.out.println("Connect to get started");
     }
-}
 
+}
 
